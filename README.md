@@ -1,7 +1,7 @@
 # Book Donation App
 
 ## Landing Page
-![Landing page](https://github.com/ritik1501/Community-Connect-Project/blob/master/screenshots/landing%20page.jpeg =20x100)
+![Landing page](https://github.com/ritik1501/Community-Connect-Project/blob/master/screenshots/landing%20page.jpeg)
 
 ## Login Page
 ![login](https://github.com/ritik1501/Community-Connect-Project/blob/master/screenshots/login.jpeg)
