@@ -32,3 +32,5 @@ flutter:
 
   assets:
     - assets/splash-image.png
+    - assets/book1.png
+    - assets/cclogo.png

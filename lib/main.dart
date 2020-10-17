@@ -1,7 +1,6 @@
 import 'package:book_donation/theme/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:book_donation/views/opening_screen.dart';
-import 'package:book_donation/theme/routes.dart';
 
 void main() {
   runApp(MyApp());
