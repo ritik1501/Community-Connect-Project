@@ -1,6 +1,7 @@
 import 'package:book_donation/theme/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -79,7 +80,8 @@ class _LoginState extends State<Login> {
             MaterialButton(
               child: Text(
                 "Forgot Password",
-                style: Theme.of(context)
+                style: Theme
+                    .of(context)
                     .textTheme
                     .caption
                     .copyWith(color: Colors.white),
@@ -120,8 +122,28 @@ class _LoginState extends State<Login> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: () {
-          //TODO: Handle Authentication
+        onPressed: () async {
+          try {
+            UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text,
+            );
+            FirebaseAuth.instance
+                .authStateChanges()
+                .listen((User user) {
+              if (user == null) {
+                print('User is currently signed out!');
+              } else {
+                Navigator.of(context).pushNamed(AppRoutes.homeScreen);
+              }
+            });
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'user-not-found') {
+              print('No user found for that email.');
+            } else if (e.code == 'wrong-password') {
+              print('Wrong password provided for that user.');
+            }
+          }
         },
       ),
     );
@@ -139,20 +161,28 @@ class _LoginState extends State<Login> {
           children: <Widget>[
             Text(
               "Not a member?",
-              style: Theme.of(context).textTheme.subtitle1.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subtitle1
+                  .copyWith(
+                color: Colors.white,
+              ),
             ),
             MaterialButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.authRegister);
               },
               child: Text(
                 "Sign Up",
-                style: Theme.of(context).textTheme.subtitle1.copyWith(
-                      color: Colors.white,
-                      decoration: TextDecoration.underline,
-                    ),
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .subtitle1
+                    .copyWith(
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             )
           ],
