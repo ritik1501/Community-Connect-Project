@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1090979354637",
+    "firebase_url": "https://book-donation-4c134.firebaseio.com",
+    "project_id": "book-donation-4c134",
+    "storage_bucket": "book-donation-4c134.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090979354637:android:47e169c4525b73830b9d44",
+        "android_client_info": {
+          "package_name": "com.example.book_donation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090979354637-386ojb1aa0nvagn17vag6jn5e2m3cfc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHTV7C12zKcHPpumIkUPbai8b0Cbn16YQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090979354637-386ojb1aa0nvagn17vag6jn5e2m3cfc4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1090979354637-sug1ojuo89ugeqqvtmqm9g583g6ku343.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookDonation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
