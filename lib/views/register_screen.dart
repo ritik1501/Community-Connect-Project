@@ -1,5 +1,6 @@
 import 'package:book_donation/theme/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _RegisterState extends State<Register> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
   TextEditingController _repasswordController;
+
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -30,9 +32,8 @@ class _RegisterState extends State<Register> {
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
-            )
-        ),
+          color: Colors.white,
+        )),
         hintText: "John Doe",
         labelText: "Username",
         labelStyle: TextStyle(
@@ -54,9 +55,8 @@ class _RegisterState extends State<Register> {
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
-            )
-        ),
+          color: Colors.white,
+        )),
         hintText: "something@example.com",
         labelText: "Email",
         labelStyle: TextStyle(
@@ -78,9 +78,8 @@ class _RegisterState extends State<Register> {
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
-            )
-        ),
+          color: Colors.white,
+        )),
         hintText: "password",
         labelText: "Password",
         labelStyle: TextStyle(
@@ -101,10 +100,9 @@ class _RegisterState extends State<Register> {
       cursorColor: Colors.white,
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
-          )
-        ),
+            borderSide: BorderSide(
+          color: Colors.white,
+        )),
         hintText: "re-enter password",
         labelText: "Re-enter Password",
         labelStyle: TextStyle(
@@ -145,8 +143,22 @@ class _RegisterState extends State<Register> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        onPressed: () {
-          //TODO: Handle Authentication
+        onPressed: () async {
+          try {
+            UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text
+            );
+            Navigator.of(context).pushNamed(AppRoutes.openingScreen);
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'weak-password') {
+              print('The password provided is too weak.');
+            } else if (e.code == 'email-already-in-use') {
+              print('The account already exists for that email.');
+            }
+          } catch (e) {
+            print(e);
+          }
         },
       ),
     );
@@ -165,19 +177,19 @@ class _RegisterState extends State<Register> {
             Text(
               "Already a member?",
               style: Theme.of(context).textTheme.subtitle1.copyWith(
-                color: Colors.white,
-              ),
+                    color: Colors.white,
+                  ),
             ),
             MaterialButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.authLogin);
               },
               child: Text(
                 "Login",
                 style: Theme.of(context).textTheme.subtitle1.copyWith(
-                  color: Colors.white,
-                  decoration: TextDecoration.underline,
-                ),
+                      color: Colors.white,
+                      decoration: TextDecoration.underline,
+                    ),
               ),
             )
           ],
@@ -208,7 +220,5 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
-
-
   }
 }
