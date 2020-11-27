@@ -22,12 +22,24 @@ class _DashboarddPageState extends State<DashboarddPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Add Data', style: TextStyle(fontSize: 15.0)),
+            title: Text('Donate Book', style: TextStyle(fontSize: 15.0)),
             content: Column(
               children: <Widget>[
                 TextField(
-                  decoration:
-                      InputDecoration(hintText: 'Enter the name of the book:'),
+                  decoration: InputDecoration(
+                    hintText: 'Enter the name of the book:',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.white,
+                    )),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onChanged: (value) {
                     this.bookName = value;
                   },
@@ -35,7 +47,19 @@ class _DashboarddPageState extends State<DashboarddPage> {
                 SizedBox(height: 5.0),
                 TextField(
                   decoration: InputDecoration(
-                      hintText: 'Enter the author of the book:'),
+                    hintText: 'Enter the author of the book:',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.white,
+                    )),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onChanged: (value) {
                     this.bookAuthor = value;
                   },
@@ -43,7 +67,19 @@ class _DashboarddPageState extends State<DashboarddPage> {
                 SizedBox(height: 5.0),
                 TextField(
                   decoration: InputDecoration(
-                      hintText: 'Enter the edition of the book:'),
+                    hintText: 'Enter the address of the user:',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.white,
+                    )),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onChanged: (value) {
                     this.bookEdition = value;
                   },
@@ -51,7 +87,19 @@ class _DashboarddPageState extends State<DashboarddPage> {
                 SizedBox(height: 5.0),
                 TextField(
                   decoration: InputDecoration(
-                      hintText: 'Donated By:(Please Enter your Name)'),
+                    hintText: 'Donated By:(Please Enter your Name)',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.white,
+                    )),
+                    labelText: "Email",
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onChanged: (value) {
                     this.bookDonor = value;
                   },
@@ -89,7 +137,7 @@ class _DashboarddPageState extends State<DashboarddPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Done', style: TextStyle(fontSize: 15.0)),
-            content: Text('Added'),
+            content: Text('Donated!!'),
             actions: <Widget>[
               FlatButton(
                 child: Text('Alright'),
@@ -140,19 +188,94 @@ class _DashboarddPageState extends State<DashboarddPage> {
   Widget _bookList() {
     if (books != null) {
       return ListView.builder(
-        itemCount: books.docs.length,
-        padding: EdgeInsets.all(5.0),
-        itemBuilder: (context, i) {
-          return new ListTile(
-            title: Text(books.docs[i].data()['bookName']),
-            subtitle: Text(books.docs[i].data()['bookAuthor']),
-            // subtitle: Text(books.docs[i].data()['bookEdition']),
-            // subtitle: Text(books.docs[i].data()['bookDonor']),
+          itemCount: books.docs.length,
+          padding: EdgeInsets.all(5.0),
+          itemBuilder: (context, i) => Card(
+                child: Card(
+                  color: Colors.blueAccent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(0.0),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Book Name  : ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0)),
+                          Text('Book Author : ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0)),
+                          Text('Donor Address : ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0)),
+                          Text('Requested By: ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(books.docs[i].data()['bookName'],
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w800)),
+                          Text(books.docs[i].data()['bookAuthor'],
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w800)),
+                          Text(books.docs[i].data()['bookEdition'],
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w800)),
+                          Text(books.docs[i].data()['bookDonor'],
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w800)),
+                        ],
+                      ),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/book1.png'),
+                        minRadius: 50.0,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+          // return new ListTile(
+          //   title: Text(books.docs[i].data()['bookName']),
+          //   subtitle: Text(books.docs[i].data()['bookAuthor']),
+          //   // subtitle: Text(books.docs[i].data()['bookEdition']),
+          //   // subtitle: Text(books.docs[i].data()['bookDonor']),
+          // );
+          // },
           );
-        },
-      );
     } else {
-      return Text('loading, Please wait!');
+      return Text('OOPS !! No Result Found.....',
+          style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              fontSize: 30.0));
     }
   }
 }

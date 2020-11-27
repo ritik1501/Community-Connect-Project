@@ -1,7 +1,8 @@
+import 'package:book_donation/views/dashboard.dart';
+import 'package:book_donation/views/dashboardd.dart';
 import 'package:flutter/material.dart';
 import 'package:book_donation/views/home_book.dart';
 import 'package:book_donation/views/request.dart';
-import 'package:book_donation/views/profile.dart';
 
 
 class Home extends StatefulWidget {
@@ -13,9 +14,8 @@ class _HomeState extends State<Home> {
 
   int _selectedIndex = 0;
   final List<Widget> _children = [
-    HomePage(),
-    Request(),
-    Profile()
+    DashboarddPage(),
+    DashboardPage()
   ];
 
   void _onItemTapped(int index) {
@@ -41,10 +41,6 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
             title: Text('Request Book'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
           ),
         ],
         currentIndex: _selectedIndex,
